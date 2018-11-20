@@ -5,20 +5,30 @@
       <h1 class="font-police-dpt">UK POLICE DEPARTMENT</h1>
     </header>
     <DisplaySearch v-if="!isHome" v-bind="{categories, paramsSearch, loadSearch}"></DisplaySearch>
+    <grid-loader class="loader-spinner-radio" :loading="spinnerStatus" color="#F2DB4D" size="10px"></grid-loader>
+    <DisplayResults v-if="isResult" v-bind="{allCrimes}"></DisplayResults>
   </div>
 </template>
 
 <script>
 import DisplaySearch from '@/components/DisplaySearch.vue'
+import DisplayResults from '@/components/DisplayResults.vue'
+import GridLoader from 'vue-spinner/src/GridLoader.vue'
 
 export default {
   name: 'home',
+  components: {
+    DisplaySearch,
+    DisplayResults,
+    GridLoader
+  },
   data: function () {
     return {
       isHome: false,
       isResult: false,
       spinnerStatus: false,
       categories: [],
+      allCrimes: [],
       paramsSearch: {
         crime: 'all-crime',
         month: 1,
@@ -31,17 +41,19 @@ export default {
     loadSearch: function () {
       this.isHome = true
       this.spinnerStatus = true
+      // self.setTimeout(function () {}, 1000)
       const data = { 'category': this.paramsSearch.crime, 'force': this.paramsSearch.force, 'date': this.paramsSearch.year + '-' + this.paramsSearch.month }
       const querystring = this.encodeQueryData(data)
       this.$http.get(`${this.API_URL}${this.API_ENDPOINTS.crimesNoLoc}?${querystring}`)
         .then((response) => {
-          console.log(response)
-          debugger
+          this.allCrimes = response.data
+          console.log(this.allCrimes)
+          this.spinnerStatus = false
+          this.isResult = true
         })
         .catch((error) => {
           console.error(error)
         })
-      this.spinnerStatus = false
     },
     encodeQueryData: function (data) {
       const ret = []
@@ -50,9 +62,6 @@ export default {
       }
       return ret.join('&')
     }
-  },
-  components: {
-    DisplaySearch
   },
   mounted () {
     this.$http.get(`${this.API_URL}${this.API_ENDPOINTS.categories}`)

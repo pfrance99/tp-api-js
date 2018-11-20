@@ -23,7 +23,8 @@
     text-align: center;
     color: #E3E3E3;
     background-color: #040062;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     width: 100vw;
 }
 
@@ -58,5 +59,12 @@ body {
     height: 10rem;
     margin-top: 3rem;
     margin-left: 2rem;
+}
+
+.loader-spinner-radio {
+  display: flex;
+  width: 70px !important;
+  margin: auto;
+  margin-top: 10rem !important;
 }
 </style>
