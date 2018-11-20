@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <p>Hello wORLD</p>
-  </div>
-
+  <header class="container-header">
+      <img class="logo-police-home" src="../assets/logo.png" alt="logo-police">
+      <h1 class="title-police-dpt">UK POLICE DEPARTMENT</h1>
+  </header>
 </template>
 
 <script>
