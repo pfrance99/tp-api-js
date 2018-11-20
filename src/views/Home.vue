@@ -1,18 +1,30 @@
 <template>
-  <div>
-    <p>Hello wORLD</p>
-  </div>
-
+<div>
+  <p>Welcome on the Site of the national police boy</p>
+  <DisplaySearch v-bind="{categories}"></DisplaySearch>
+</div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import DisplaySearch from '@/components/DisplaySearch.vue'
 
 export default {
   name: 'home',
+  data: function() {
+    return {
+      categories: []
+    }
+  },
   components: {
-    // HelloWorld
+    DisplaySearch
+  },
+  mounted() {
+    this.$http.get(`${this.API_URL}${this.API_ENDPOINTS.categories}`)
+      .then((response) => {
+        this.categories = response.data;
+      }).catch((err) => {
+        console.log(err);
+      })
   }
 }
 </script>
