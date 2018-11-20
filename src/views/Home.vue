@@ -1,7 +1,7 @@
 <template>
   <header class="container-header">
       <img class="logo-police-home" src="../assets/logo.png" alt="logo-police">
-      <h1 class="title-police-dpt">UK POLICE DEPARTMENT</h1>
+      <h1 class="font-police-dpt">UK POLICE DEPARTMENT</h1>
   </header>
 </template>
 

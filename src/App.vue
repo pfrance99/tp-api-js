@@ -40,11 +40,11 @@ body {
   margin: 0;
 }
 
-.console-font {
+.font-console {
   font-family: 'VT323', monospace;
 }
 
-.title-police-dpt {
+.font-police-dpt {
   font-family: 'Roboto Slab', serif;
   margin-top: 7rem;
   margin-right: 2rem;
