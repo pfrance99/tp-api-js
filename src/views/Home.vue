@@ -6,7 +6,7 @@
     </header>
     <DisplaySearch v-if="!isHome" v-bind="{categories, paramsSearch, loadSearch}"></DisplaySearch>
     <grid-loader class="loader-spinner-radio" :loading="spinnerStatus" color="#F2DB4D" size="10px"></grid-loader>
-    <DisplayResults v-if="isResult" v-bind="{allCrimes}"></DisplayResults>
+    <DisplayResults v-if="isResult" v-bind="{allCrimes, categories}"></DisplayResults>
   </div>
 </template>
 
@@ -47,7 +47,6 @@ export default {
       this.$http.get(`${this.API_URL}${this.API_ENDPOINTS.crimesNoLoc}?${querystring}`)
         .then((response) => {
           this.allCrimes = response.data
-          console.log(this.allCrimes)
           this.spinnerStatus = false
           this.isResult = true
         })
