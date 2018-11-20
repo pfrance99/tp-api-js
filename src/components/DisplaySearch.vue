@@ -32,19 +32,14 @@
     </select>
   </label>
   <br><br>
-  <button type="submit">Search</button>
+  <button type="submit" v-on:click="loadSearch()">Search</button>
 </div>
 </template>
 
 <script>
 export default {
   name: 'DisplaySearch',
-  props: ['categories', 'paramsSearch'],
-  data: function () {
-    return {
-      todayYear: new Date()
-    }
-  }
+  props: ['categories', 'paramsSearch', 'loadSearch', 'isHome']
 }
 </script>
 

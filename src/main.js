@@ -10,7 +10,8 @@ Vue.prototype.$http = axios
 Vue.prototype.jquery = jQuery
 Vue.prototype.API_URL = 'https://data.police.uk/api/'
 Vue.prototype.API_ENDPOINTS = {
-  categories: 'crime-categories'
+  categories: 'crime-categories',
+  crimesNoLoc: 'crimes-no-location'
 }
 
 new Vue({
