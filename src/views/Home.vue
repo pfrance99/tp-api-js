@@ -4,7 +4,7 @@
       <img class="logo-police-home" src="../assets/logo.png" alt="logo-police">
       <h1 class="font-police-dpt">UK POLICE DEPARTMENT</h1>
     </header>
-    <DisplaySearch v-bind="{categories}"></DisplaySearch>
+    <DisplaySearch v-bind="{categories, paramsSearch}"></DisplaySearch>
   </div>
 </template>
 
@@ -15,7 +15,13 @@ export default {
   name: 'home',
   data: function () {
     return {
-      categories: []
+      categories: [],
+      paramsSearch: {
+        crime: 'all-crime',
+        month: 1,
+        year: 2018,
+        force: 'metropolitan'
+      }
     }
   },
   components: {
