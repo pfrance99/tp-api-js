@@ -49,9 +49,9 @@ export default {
         datasets: [{
           data: countLabels,
           backgroundColor: [
-            'rgba(0,255,0,1',
-            'rgba(255,0,0,1',
-            'rgba(0,0,255,1',
+            'rgba(0,255,0,1)',
+            'rgba(255,0,0,1)',
+            'rgba(0,0,255,1)',
             'rgba(0,255,255,1)'
           ]
         }]
