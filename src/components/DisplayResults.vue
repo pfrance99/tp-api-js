@@ -1,74 +1,34 @@
 <template>
-  <div>
-    <canvas id="crimeChart" width="400" height="400"></canvas>
-  </div>
+<div>
+  <h2>> Statistics for {{ date }} <span class="blink cursor-pointer action" v-on:click="backToSearch()"> Click to return</span></h2>
+  <h2 v-for="(category, index) in orderedCategories " :key="category.name">{{ index + 1 }}) {{ category.name}} : <span v-bind:class="getClass(category.number)">{{ category.number}}</span></h2>
+</div>
 </template>
 
 <script>
-import Chart from 'chart.js'
+import _ from 'lodash';
 
 export default {
   name: 'DisplayResults',
-  props: ['allCrimes', 'categories'],
-  mounted () {
-    // console.log(this.categories)
-    const ctx = document.getElementById('crimeChart')
-    const arrLabels = []
-    const countLabels = []
-    let oldElement = ''
-    let i = 0
-    let j = 0
-    this.allCrimes.forEach(function (element) {
-      let currentElement = element.category
-      if (oldElement !== currentElement) {
-        j = 0
-        j++
-        oldElement = currentElement
-        // countLabels[currentElement] = 1
-        countLabels[i].push(j)
-        i++
-      } else {
-        // countLabels[currentElement]++
-        i--
-        countLabels[i].push(j++)
-        i++
-      }
-    })
-    console.log(countLabels)
-    this.categories.forEach(function (element) {
-      let elementName = element.name
-      if (elementName !== 'All crime') {
-        arrLabels.push(elementName)
-      }
-    })
-    arrLabels.sort()
-    const chartData = {
-      type: 'doughnut',
-      data: {
-        labels: arrLabels,
-        datasets: [{
-          data: countLabels,
-          backgroundColor: [
-            'rgba(0,255,0,1)',
-            'rgba(255,0,0,1)',
-            'rgba(0,0,255,1)',
-            'rgba(0,255,255,1)'
-          ]
-        }]
-      },
-      options: {
-
-      }
-    }
-    this.createChart(ctx, chartData)
-  },
+  props: ['categories', 'date', 'backToSearch'],
   methods: {
-    createChart: function (chartId, chartData) {
-      const myChart = new Chart(chartId, {
-        type: chartData.type,
-        data: chartData.data,
-        options: chartData.options
-      })
+    getClass: n => {
+      let className = '';
+      if (n >= 0 && n <= 20) { //0/20
+        className = 'ok';
+      } else if (n > 20 && n <= 50) { //20/50
+        className = 'warning';
+      } else if (n > 50 && n <= 100) { //50/100
+        className = 'warning-plus';
+      } else {
+        className = 'danger';
+      }
+      return className;
+    },
+  },
+  computed: {
+    orderedCategories: function() {
+      return _.orderBy(this.categories, 'number').reverse();
     }
   }
 }
@@ -76,5 +36,34 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+.ok {
+    color: #28a745;
+}
+.warning {
+    color: #fff007;
+}
+.warning-plus {
+    color: #ff9407;
+}
+.danger {
+    color: #bd2130;
+}
+.action {
+    color: #8ac8ff;
+}
+.blink {
+    animation: blink 1.5s infinite linear;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
 
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
 </style>
