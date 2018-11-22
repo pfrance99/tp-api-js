@@ -1,5 +1,6 @@
 <template>
 <div>
+  <h2>> User session ID : {{ userKeyId }}</h2>
   <h2>> Statistics for {{ date }} <span class="blink cursor-pointer action" v-on:click="backToSearch()"> Click to return</span></h2>
   <h2 v-for="(category, index) in orderedCategories " :key="category.name">{{ index + 1 }}) {{ category.name}} : <span v-bind:class="getClass(category.number)">{{ category.number}}</span></h2>
 </div>
@@ -10,7 +11,7 @@ import _ from 'lodash';
 
 export default {
   name: 'DisplayResults',
-  props: ['categories', 'date', 'backToSearch'],
+  props: ['categories', 'date', 'userKeyId', 'backToSearch'],
   methods: {
     getClass: n => {
       let className = '';

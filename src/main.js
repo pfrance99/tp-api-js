@@ -5,6 +5,8 @@ import axios from 'axios'
 import jQuery from 'jquery'
 // import select2 from 'select2'
 
+localStorage.setItem('userKey', Math.floor(Math.random() * 6000) + 1000 );
+
 Vue.config.productionTip = true
 Vue.prototype.$http = axios
 Vue.prototype.jquery = jQuery

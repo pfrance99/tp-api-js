@@ -8,7 +8,7 @@
     <div class="computer-child font-console">
       <DisplaySearch v-if="!isResult && !spinnerStatus" v-bind="{categories, paramsSearch, loadSearch}"></DisplaySearch>
       <h2 v-show="spinnerStatus"><span class="">></span> Loading ...</h2>
-      <DisplayResults v-if="isResult && !spinnerStatus" v-bind="{categories, date, backToSearch}"></DisplayResults>
+      <DisplayResults v-if="isResult && !spinnerStatus" v-bind="{categories, date, userKeyId, backToSearch}"></DisplayResults>
     </div>
   </div>
 </div>
@@ -30,6 +30,7 @@ export default {
       spinnerStatus: false,
       categories: [],
       date: '',
+      userKeyId: Number(localStorage.getItem('userKey')),
       paramsSearch: {
         crime: 'all-crime',
         month: 1,
@@ -47,7 +48,7 @@ export default {
         'force': this.paramsSearch.force,
         'date': this.paramsSearch.year + '-' + this.paramsSearch.month
       }
-      let querystring = this.encodeQueryData(data);
+      let querystring = this.encodeQueryData(data)
       this.$http.get(`${this.API_URL}${this.API_ENDPOINTS.crimesNoLoc}?${querystring}`)
         .then(response => {
           this.categories.forEach(e => {
